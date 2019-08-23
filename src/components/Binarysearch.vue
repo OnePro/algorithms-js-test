@@ -15,6 +15,9 @@
         </b-col>
 
         <b-col md="4">
+                    <div v-show="wingame" style="color:green;">You've found in {{stepscounter}} steps.</div>
+          <b-button style="margin:3px;" @click="startNewGame" variant="success">New game</b-button>
+          <div>
           <div v-show="wingame">
             <h3>{{hideNumber}}</h3>
           </div>
@@ -26,9 +29,9 @@
             Binary search tries:
             <span>{{binarySearchSteps}}</span>
           </p>
-          <div v-show="wingame" style="color:green;">You've found in {{stepscounter}} steps.</div>
-          <b-button style="margin:3px;" @click="startNewGame" variant="success">New game</b-button>
+
           <b-button @click="selfGame" variant="primary">Binary search algorithm</b-button>
+          <span> log2({{amountOfNumbers}})={{logOfNumber}}</span></div>
           <b-row class="my-1">
             <b-col sm="9">
               <label for="amountOgNumbers">Amount of numbers:</label>
@@ -61,6 +64,11 @@ export default {
       binarySearchSteps: 0,
       amountOfNumbers: 200
     };
+  },
+  computed:{
+    logOfNumber(){
+      return Math.floor(Math.log2(this.amountOfNumbers))+1;
+    }
   },
   methods: {
     createListForSearching() {
