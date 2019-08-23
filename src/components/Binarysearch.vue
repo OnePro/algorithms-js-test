@@ -15,29 +15,59 @@
         </b-col>
 
         <b-col md="4">
-                    <div v-show="wingame" style="color:green;">You've found in {{stepscounter}} steps.</div>
+          <div v-show="wingame" style="color:green;">You've found in {{stepscounter}} steps.</div>
           <b-button style="margin:3px;" @click="startNewGame" variant="success">New game</b-button>
           <div>
-          <div v-show="wingame">
-            <h3>{{hideNumber}}</h3>
-          </div>
-          <p>
-            Human tries:
-            <span>{{stepscounter}}</span>
-          </p>
-          <p style="color:#007bff;">
-            Binary search tries:
-            <span>{{binarySearchSteps}}</span>
-          </p>
+            <div v-show="wingame">
+              <h3>{{hideNumber}}</h3>
+            </div>
+            <p>
+              Human tries:
+              <span>{{stepscounter}}</span>
+            </p>
+            <p style="color:#007bff;">
+              Binary search tries:
+              <span>{{binarySearchSteps}}</span>
+            </p>
 
-          <b-button @click="selfGame" variant="primary">Binary search algorithm</b-button>
-          <span> log2({{amountOfNumbers}})={{logOfNumber}}</span></div>
+            <b-button @click="selfGame" variant="primary">Binary search algorithm</b-button>
+            <span>log2({{amountOfNumbers}})={{logOfNumber}}</span>
+          </div>
           <b-row class="my-1">
             <b-col sm="9">
               <label for="amountOgNumbers">Amount of numbers:</label>
               <b-form-input v-model="amountOfNumbers" id="amountOgNumbers" type="number"></b-form-input>
             </b-col>
           </b-row>
+
+          <button @click="showCode = !showCode">Show code</button>
+          <div v-show="showCode">
+            <pre v-highlightjs>
+              <code class="javascript">
+                    var doSearch = function(array, targetValue) {
+                      var min = 0;
+                      var max = array.length - 1;
+                      var guess;
+                      
+                          while (min<=max) {
+                            guess = Math.floor((max - min) / 2) + min;
+                            println(guess);
+                            steps +=1;
+                            
+                            if (targetValue === array[guess]) {
+                              return guess;
+                            } else if (array[guess] < targetValue ) {
+                              min = guess + 1;
+                            } else {
+                              max = guess - 1;
+                            }
+                          }
+
+                      return -1;
+                    };           
+              </code>
+            </pre>
+          </div>
         </b-col>
       </b-row>
     </div>
@@ -62,12 +92,13 @@ export default {
       startRange: 0,
       finishRange: 0,
       binarySearchSteps: 0,
-      amountOfNumbers: 200
+      amountOfNumbers: 200,
+      showCode: false
     };
   },
-  computed:{
-    logOfNumber(){
-      return Math.floor(Math.log2(this.amountOfNumbers))+1;
+  computed: {
+    logOfNumber() {
+      return Math.floor(Math.log2(this.amountOfNumbers)) + 1;
     }
   },
   methods: {
