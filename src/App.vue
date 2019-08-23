@@ -1,31 +1,64 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div>
+      <b-navbar type="dark" variant="dark">
+        <b-navbar-nav>
+          <b-nav-item>
+            <router-link to="/" v-slot="{ href, route, navigate, isActive, isExactActive }">
+              <NavLink :active="isActive" :href="href" @click="navigate">Algorithms</NavLink>
+            </router-link>
+          </b-nav-item>
+          <b-nav-item>
+            <router-link :to="'other'" v-slot="{ href, route, navigate, isActive, isExactActive }">
+              <NavLink :active="isActive" :href="href" @click="navigate">Other</NavLink>
+            </router-link>
+          </b-nav-item>
+        </b-navbar-nav>
+      </b-navbar>
     </div>
-    <router-view />
+
+    <div class="container">
+      <router-view />
+    </div>
   </div>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      isActive: true
+    };
+  }
+};
+</script>
+
 <style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
 }
-#nav {
-  padding: 30px;
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
 }
 </style>
