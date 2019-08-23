@@ -29,7 +29,6 @@
           <div v-show="wingame" style="color:green;">You've found in {{stepscounter}} steps.</div>
           <b-button style="margin:3px;" @click="startNewGame" variant="success">New game</b-button>
           <b-button @click="selfGame" variant="primary">Binary search algorithm</b-button>
-          <b-button @click="tryMethod" variant="primary">Try</b-button>
           <b-row class="my-1">
             <b-col sm="9">
               <label for="amountOgNumbers">Amount of numbers:</label>
@@ -153,75 +152,6 @@ export default {
           return findedNum;
         }
       }
-    },
-    doSearch(array, targetValue) {
-      var min = 0;
-      var max = array.length - 1;
-      var guess;
-      var steps = 0;
-      while (max<min) {
-        steps += 1;
-        if (steps > 10) {
-          console.log("More steps");
-          break;
-        }
-        guess = Math.floor((max - min) / 2) + min;
-        if (max < min) {
-          break;
-        }
-
-        if (targetValue === array[guess]) {
-          return guess;
-        } else if (targetValue < array[guess]) {
-          max = guess - 1;
-        } else {
-          min = guess + 1;
-        }
-      }
-
-      return -1;
-    },
-    tryMethod() {
-      var primes = [
-        2,
-        3,
-        5,
-        7,
-        11,
-        13,
-        17,
-        19,
-        23,
-        29,
-        31,
-        37,
-        41,
-        43,
-        47,
-        53,
-        59,
-        61,
-        67,
-        71,
-        73,
-        79,
-        83,
-        89,
-        97
-      ];
-
-      var result = this.doSearch(primes, 73);
-      console.log("Found prime 73 at index " + result);
-
-      var result = this.doSearch(primes, 20);
-      console.log("Found prime 20 at index " + result);
-
-      console.log("Found prime 97 at index " + this.doSearch(primes, 97));
-      console.log("Found prime 89 at index " + this.doSearch(primes, 89));
-      console.log("Found prime 83 at index " + this.doSearch(primes, 83));
-      console.log("Found prime 2 at index " + this.doSearch(primes, 2));
-      console.log("Found prime 3 at index " + this.doSearch(primes, 3));
-       console.log("Found prime 180 at index " + this.doSearch(primes, 180));
     }
   },
   created() {
